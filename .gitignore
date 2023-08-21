@@ -1,0 +1,52 @@
+# Python-specific
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.dist-info/
+dist/
+build/
+*.egg
+*.egg-info
+*.egg-info/*
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+.ipynb*
+
+# Security-sensitive files
+secrets.json
+config.ini
+
+# Logs and debugging
+*.log
+*.swp
+.vscode/
+*.idea/
+
+# Temporary files
+*.bak
+*.tmp
+*.temp
+
+# Compiled files
+*.exe
+*.dll
+*.so
+*.pyc
+*.pyo
+
+# IDE-specific
+.idea/
+*.iml
+*.idea/workspace.xml
+*.idea/misc.xml
+
+# Text editor-specific
+*~
