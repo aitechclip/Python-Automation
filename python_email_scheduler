@@ -1,0 +1,42 @@
+	import csv
+import time
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+# SMTP Configuration
+SMTP_SERVER = 'smtp.example.com'
+SMTP_PORT = 587
+SMTP_USERNAME = 'your_username'
+SMTP_PASSWORD = 'your_password'
+SENDER_EMAIL = 'your_email@example.com'
+
+def send_email(recipient, subject, message):
+    msg = MIMEMultipart()
+    msg['From'] = SENDER_EMAIL
+    msg['To'] = recipient
+    msg['Subject'] = subject
+    msg.attach(MIMEText(message, 'plain'))
+
+    try:
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(SMTP_USERNAME, SMTP_PASSWORD)
+            server.sendmail(SENDER_EMAIL, recipient, msg.as_string())
+            print(f"Email sent to {recipient}")
+    except Exception as e:
+        print(f"Error sending email to {recipient}: {e}")
+
+def schedule_emails(csv_file):
+    with open(csv_file, 'r') as file:
+        reader = csv.reader(file)
+        next(reader)  # Skip header row
+        for row in reader:
+            recipient, subject, message = row
+            send_email(recipient, subject, message)
+            time.sleep(10)  # Adjust the interval between emails (in seconds)
+
+if __name__ == "__main__":
+    csv_file = 'recipient_data.csv'  # Provide the path to your CSV file
+    schedule_emails(csv_file)
+
